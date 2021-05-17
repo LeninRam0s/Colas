@@ -1,7 +1,6 @@
 ﻿using Colas.Clases.ColaArreglo;
 using Colas.Clases.Ejemplos;
 using Colas.Clases.Pila_Lista;
-using Colas.Clases.Validador;
 using System;
 using System.Collections;
 
