@@ -87,10 +87,5 @@ namespace Colas.Clases.ColaArreglo
                 throw new Exception("Cola vacia");
             }
         }
-
-
-
-
-
     }
 }

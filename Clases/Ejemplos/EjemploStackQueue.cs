@@ -8,25 +8,31 @@ namespace Colas.Clases.Ejemplos
 {
     class EjemploStackQueue
     {
+        //EVALUAR SI ES CAPICUA UN NUMERO QUE SE INGRESE POR CONSOLA
+        //CON ESTRUCTURA DE DATOS STACK Y QUEUE
+
+        //DETERMINAR SI ES NUMERO EL DATO INGRESADO
         public bool validacion(String numero)
         {
             bool sw = true;
             int i = 0;
             while (sw && (i < numero.Length))
             {
-                char c;
-                c = numero[i++];
-                sw = (c >= '0' && c <= '9');
+                char digito;
+                digito = numero[i++];
+                sw = (digito >= '0' && digito <= '9');
             }
             return sw;
         }
 
         public void CapicuaStackQueue()
         {
+            String entrada;
             bool capicua;
-            String numero;
-            Stack<Char> pila = new Stack<char>();
-            Queue<Char> cola = new Queue<char>();
+            //PARA EL EJEMPLO SE UTILIZA LA COLECCION GENERICA Stack<T>
+            //CREAMOS LOS OBJETOS
+            Stack<char> pila_Stack = new();
+            Queue<char> cola_Queue = new();
 
             try
             {
@@ -34,39 +40,42 @@ namespace Colas.Clases.Ejemplos
 
                 do
                 {
-                    Console.WriteLine("\nIngrese un numero: ");
-                    numero = Console.ReadLine();
-                } while (!validacion(numero));
+                    Console.WriteLine("\nIngrese un numero, para determinar si es Capicua: ");
+                    entrada = Console.ReadLine();
+                } while (!validacion(entrada));
 
+                //INSERTAR DATOS
                 //EL DIGITO SE COLOCA EN LA COLA Y EN LA PILA 
-                for (int i = 0; i < numero.Length; i++)
+                for (int i = 0; i < entrada.Length; i++)
                 {
-                    char c;
-                    c = numero[i];
-                    pila.Push(c);//AGREGA PILA
-                    cola.Enqueue(c);//AGREGA COLA
+                    char digito;
+                    digito = entrada[i];
+                    pila_Stack.Push(digito);//PUSH: MÉTODO PARA AGREGAR UN ELEMENTO A LA PILA STACK
+                    cola_Queue.Enqueue(digito);//ENQUEUE: MÉTODO PARA AGREGAR UN ELEMENTO AL INICIO EL LA FILA/COLA
                 }
+
+                //SACAR DATOS
                 //EXTRAER EL DIGITO DE LA COLA Y DE LA PILA PARA EVALUAR
                 do
                 {
-                    char d;
-                    d = cola.Dequeue();
-                    capicua = d.Equals(pila.Pop());
-                } while (capicua && cola.Count != 0);
+                    char digito;
+                    digito = cola_Queue.Dequeue();//DEQUEUE: DEVUELVE UN ELEMENTO DEL PRINCIPIO DE LA COLA Y LO ELIMINA DE LA COLA
+                    capicua = digito.Equals(pila_Stack.Pop()); //POP: ELIMINA Y DEVUELVE ELEMENTOS DE LA PARTE SUPERIOR DE LA PILA
+                } while (capicua && cola_Queue.Count != 0);
 
                 if (capicua)
                 {
-                    Console.WriteLine($"\nNumero {numero} es capicua");
+                    Console.WriteLine($"\nNumero {entrada} es capicua");
                 }
                 else
                 {
-                    Console.WriteLine($"\nNumero {numero} no es capicua");
+                    Console.WriteLine($"\nNumero {entrada} no es capicua");
                     Console.WriteLine("\n*INTENTE DE NUEVO*");
                     new EjemploStackQueue().CapicuaStackQueue();
                 }
                 //LIMPIAR ESTRUCTURAS
-                pila = new Stack<char>();
-                cola = new Queue<char>();
+                pila_Stack = new Stack<char>();
+                cola_Queue = new Queue<char>();
 
             }
             catch (Exception e)
